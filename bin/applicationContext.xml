@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- load the properties file: sport.properties -->
+    <context:property-placeholder location="classpath:sport.properties"/>
+    
+    <!-- Define the dependency -->
+    <bean id="myFortune"
+          class="com.springdemo.ioc.HappyFortuneService">
+    </bean>
+ 
+	<bean id="myCoach"
+	      class="com.springdemo.ioc.TrackCoach">
+	      <!-- set up constructor injection -->
+	      <constructor-arg ref="myFortune"/>
+	</bean>
+	
+	<bean id="myCricketCoach"
+	      class="com.springdemo.ioc.CricketCoach">
+	      
+	      <!--  set up setter injection -->
+	      <property name="fortuneService" ref="myFortune"/>
+	      
+	      <!-- injecting literal values -->
+	      <!-- <property name="emailAddress" value="coach@gmail.com"/>
+	      <property name="team" value="Sunrisers Hyderabad"/> -->
+	      
+	      <!-- referencing values from properties file  -->
+	      <property name="emailAddress" value="${foo.email}"/>
+	      <property name="team" value="${foo.team}"/>
+	      
+	</bean>
+	
+	<!-- Practice Activity  -->
+	<!-- Define the dependency of random fortune service  -->
+	<bean id="myRandomFortune"
+	      class="com.springdemo.ioc.RandomFortuneService">
+	</bean>
+	
+	<bean id="myBaseballCoach"
+	      class="com.springdemo.ioc.BaseballCoach">
+	      <!-- set up constructor injection -->
+	      <constructor-arg ref="myRandomFortune"/>	      
+	</bean>
+
+</beans>
+
+
+
+
+
