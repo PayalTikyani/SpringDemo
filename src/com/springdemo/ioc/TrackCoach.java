@@ -17,13 +17,22 @@ public class TrackCoach implements Coach {
 
 	@Override
 	public String getDailyFortune() {
-		// TODO Auto-generated method stub
 		return "Just do it : " + fortuneService.getFortune();
 	}
 
 	@Override
 	public String getRandomFortune() {
 		return fortuneService.getFortune();
+	}
+	
+	//custom init method
+	public void doMyStartUpStuff() {
+		System.out.println("TrackCoach : inside method doMyStartUpStuff");
+	}
+	
+	//custom destroy method
+	public void doMyCleanUpStuff() {
+		System.out.println("TrackCoach : inside method doMyCleanUpStuff");
 	}
 
 }
